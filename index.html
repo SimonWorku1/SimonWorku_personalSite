@@ -126,6 +126,16 @@
   .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:560px){ .grid{grid-template-columns:1fr} }
+
+  /* mobile: collapse the filter sidebar so the grid isn't squished */
+  @media (max-width:720px){
+    .wrap{padding:0 18px}
+    .layout{grid-template-columns:1fr; gap:0}
+    .side{display:none}
+    #hideFilters{display:none}
+    .titlerow{align-items:flex-start}
+    .titlerow .tools{width:100%; justify-content:flex-end}
+  }
   .prod{position:relative; display:flex; flex-direction:column}
   .prod .media{display:block; background:var(--tile); aspect-ratio:1/1; position:relative; overflow:hidden}
   .prod .media .art{position:absolute; inset:0; display:grid; place-items:center}
