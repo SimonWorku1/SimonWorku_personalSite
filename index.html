@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simon Worku — Software Engineer</title>
+<meta name="description" content="Simon Worku — software engineer & CS student at LMU. Full-stack web & mobile products and frontier-AI evaluation. Browse the work, read the résumé, get in touch.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+  /* ============ Storefront home (Nike-style, sharp, mono palette) ============ */
+  :root{
+    --ink:#111111; --muted:#707072; --faint:#8d8d8f; --line:#e5e5e5; --line2:#d6d6d6;
+    --bg:#ffffff; --util:#f5f5f5; --tile:#f1f1f1; --accent:#c8462a;
+    --sans:"Helvetica Neue",Helvetica,Arial,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased}
+  a{color:inherit; text-decoration:none}
+  button{font-family:inherit; cursor:pointer; background:none; border:0; color:inherit}
+  img,svg{display:block}
+  ::selection{background:var(--ink); color:#fff}
+  svg{stroke-linecap:square; stroke-linejoin:miter}
+  .wrap{max-width:1400px; margin:0 auto; padding:0 24px}
+
+  .kicker{color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; margin:0 0 14px}
+  .h2{font-size:clamp(28px,4.6vw,46px); font-weight:700; letter-spacing:-.02em; line-height:1.03; margin:0}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:14px 26px; font-size:15px; font-weight:500; border:1.5px solid var(--ink); transition:background .15s,color .15s,border-color .15s; white-space:nowrap}
+  .btn-dark{background:var(--ink); color:#fff; border-color:var(--ink)} .btn-dark:hover{background:#333; border-color:#333}
+  .btn-line{background:#fff; color:var(--ink); border-color:var(--ink)} .btn-line:hover{background:var(--ink); color:#fff}
+  .btn-fill{background:#fff; color:var(--ink); border-color:#fff} .btn-fill:hover{background:#e6e6e6; border-color:#e6e6e6}
+  .btn-out{background:transparent; color:#fff; border-color:rgba(255,255,255,.6)} .btn-out:hover{background:#fff; color:var(--ink); border-color:#fff}
+
+  /* utility bar */
+  .util{background:var(--util); font-size:14px}
+  .util .wrap{display:flex; justify-content:flex-end; align-items:center; height:42px}
+  .util a{padding:0 14px; color:var(--ink); position:relative; font-weight:500}
+  .util a + a::before{content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); height:12px; width:1px; background:var(--line2)}
+  .util a:hover{color:var(--muted)}
+
+  /* main nav */
+  .nav{border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:40}
+  .nav .wrap{display:flex; justify-content:flex-end; align-items:center; height:60px; gap:16px}
+  .navtools{display:flex; align-items:center; gap:8px}
+  .searchbox{display:flex; align-items:center; gap:8px; background:var(--util); padding:0 14px; height:40px; width:180px}
+  .searchbox input{border:0; background:none; outline:0; font-size:15px; width:100%; color:var(--ink)}
+  .searchbox svg{stroke:var(--muted); flex:none}
+  @media (max-width:720px){ .searchbox{width:44px; padding:0; justify-content:center} .searchbox input{display:none} }
+  .icobtn{width:40px; height:40px; display:grid; place-items:center; position:relative}
+  .icobtn svg{stroke:var(--ink)}
+  .icobtn .n{position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 3px; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:none; place-items:center}
+  .icobtn .n.show{display:grid}
+
+
+  /* hero */
+  .hero{background:var(--ink); color:#fff; position:relative; overflow:hidden}
+  .hero::after{content:""; position:absolute; right:-8%; top:-20%; width:60%; height:140%;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 46px); pointer-events:none}
+  .hero .wrap{padding-top:clamp(60px,11vh,120px); padding-bottom:clamp(52px,8vh,96px); position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center}
+  .hero .avatar{width:clamp(120px,18vw,168px); height:clamp(120px,18vw,168px); border-radius:50%; background-color:#f0efed; background-image:url('assets/profile.jpg'); background-repeat:no-repeat; background-position:50% 28%; background-size:cover; border:3px solid rgba(255,255,255,.16); margin-bottom:30px}
+  .hero h1{font-size:clamp(3rem,11vw,7.5rem); font-weight:800; letter-spacing:-.04em; line-height:.9; margin:0}
+  .hero .role{max-width:42rem; font-size:clamp(15px,2vw,20px); color:#cfcfcf; margin:20px 0 0; letter-spacing:.01em}
+  .hero .email{display:inline-block; margin:14px 0 0; font-size:clamp(15px,1.7vw,18px); color:#fff; border-bottom:1px solid rgba(255,255,255,.35); padding-bottom:2px; transition:border-color .15s,color .15s}
+  .hero .email:hover{color:var(--accent); border-color:var(--accent)}
+  .hero .cta{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:34px}
+
+  /* generic section */
+  .section{padding:clamp(56px,9vw,110px) 0}
+  .section.tight{padding:clamp(40px,6vw,72px) 0}
+
+  /* about */
+  .about{border-bottom:1px solid var(--line)}
+  .about .grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(24px,5vw,64px); align-items:center}
+  @media (max-width:820px){ .about .grid{grid-template-columns:1fr; gap:28px} }
+  .about .photo{width:100%; aspect-ratio:1/1; object-fit:cover; background:var(--tile); filter:grayscale(1); transition:filter .3s}
+  .about:hover .photo{filter:grayscale(0)}
+  .about h2 .u{color:var(--accent)}
+  .about .h2{max-width:24ch}
+  .about p{font-size:clamp(16px,1.6vw,18px); color:#3a3a3a; max-width:44rem; margin:18px 0 0}
+  .about .abtn{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px}
+
+  /* work section header */
+  .worksec{border-bottom:1px solid var(--line)}
+  .titlerow{display:flex; align-items:flex-end; justify-content:space-between; padding:0 0 18px; flex-wrap:wrap; gap:12px}
+  .titlerow .lead .kicker{margin-bottom:8px}
+  .titlerow h1{font-size:clamp(24px,3.4vw,34px); font-weight:700; letter-spacing:-.02em; margin:0}
+  .titlerow .tools{display:flex; align-items:center; gap:22px}
+  .titlerow .tools button{display:flex; align-items:center; gap:8px; font-size:16px; color:var(--ink)}
+  .titlerow .tools button svg{stroke:var(--ink)}
+  .sortwrap{position:relative}
+  .sortmenu{position:absolute; right:0; top:calc(100% + 8px); background:#fff; border:1px solid var(--line); min-width:180px; z-index:30; display:none}
+  .sortmenu.open{display:block}
+  .sortmenu button{display:block; width:100%; text-align:left; padding:12px 16px; font-size:14px}
+  .sortmenu button:hover{background:var(--util)}
+  .sortmenu button.sel{font-weight:700}
+
+  /* layout */
+  .layout{display:grid; grid-template-columns:200px 1fr; gap:0 20px; align-items:start}
+  .layout.nofilters{grid-template-columns:1fr}
+  .layout.nofilters .side{display:none}
+
+  /* sidebar */
+  .side{position:sticky; top:104px; align-self:start; max-height:calc(100vh - 120px); overflow-y:auto; padding-right:8px}
+  .side .catlist button{display:block; width:100%; text-align:left; font-size:16px; font-weight:500; padding:7px 0; color:var(--ink)}
+  .side .catlist button:hover{color:var(--muted)}
+  .side .catlist button.active{font-weight:700}
+  .side .toggle{display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); margin-bottom:14px}
+  .side .toggle .sw{width:38px; height:20px; background:#e5e5e5; position:relative; transition:background .15s; flex:none}
+  .side .toggle .sw::after{content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; transition:left .15s}
+  .side .toggle .sw[aria-pressed="true"]{background:var(--ink)}
+  .side .toggle .sw[aria-pressed="true"]::after{left:20px}
+  .grp{border-top:1px solid var(--line); padding:16px 0}
+  .grp .ghead{display:flex; align-items:center; justify-content:space-between; width:100%; font-size:15px; font-weight:700}
+  .grp .ghead svg{stroke:var(--ink); transition:transform .2s}
+  .grp.collapsed .ghead svg{transform:rotate(-90deg)}
+  .grp .gbody{margin-top:12px}
+  .grp.collapsed .gbody{display:none}
+  .grp label{display:flex; align-items:center; gap:10px; padding:6px 0; font-size:14px; cursor:pointer; color:var(--ink)}
+  .grp label input{appearance:none; -webkit-appearance:none; width:16px; height:16px; border:1.5px solid var(--line2); flex:none; display:grid; place-items:center}
+  .grp label input:checked{background:var(--ink); border-color:var(--ink)}
+  .grp label input:checked::after{content:""; width:6px; height:10px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px)}
+
+  /* product grid */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .grid{grid-template-columns:1fr} }
+  .prod{position:relative; display:flex; flex-direction:column}
+  .prod .media{display:block; background:var(--tile); aspect-ratio:1/1; position:relative; overflow:hidden}
+  .prod .media .art{position:absolute; inset:0; display:grid; place-items:center}
+  .prod .media .art svg{width:44%; height:44%; stroke:#2b2b2b; fill:none; stroke-width:1.2; transition:transform .35s ease}
+  .prod:hover .media .art svg{transform:scale(1.05)}
+  .prod .media .art.logo{background:#f4ead2}
+  .prod .media .art.logo.marco{background:#f5d24e}
+  .prod .media .art.logo.selene{background:#0b0d12}
+  .prod .media .art.logo.handshake{background:#d4f24d}
+  .prod .media .art.logo img{width:100%; height:100%; object-fit:contain; transition:transform .35s ease}
+  .prod:hover .media .art.logo img{transform:scale(1.05)}
+  .prod .media .code{position:absolute; left:16px; bottom:14px; font-size:12px; color:#9a9a9c}
+  a.media{cursor:pointer} div.media{cursor:default}
+  .save{position:absolute; top:12px; right:12px; z-index:2; width:36px; height:36px; background:#fff; display:grid; place-items:center; opacity:0; transition:opacity .15s}
+  .prod:hover .save, .save.on{opacity:1}
+  .save svg{stroke:var(--ink); fill:none; width:18px; height:18px}
+  .save.on svg{fill:var(--ink)}
+  .prod .info{padding:12px 2px 4px; display:flex; flex-direction:column; flex:1 1 auto}
+  .prod .label{color:var(--accent); font-weight:500; margin-bottom:2px}
+  .prod .ttl{font-weight:500; color:var(--ink)}
+  a.ttl:hover{color:var(--muted)}
+  .prod .sub{color:var(--muted)}
+  .prod .stat{color:var(--ink); margin-top:6px}
+  .prod .locked{color:var(--faint); font-size:13px; margin-top:6px; display:flex; align-items:center; gap:6px}
+  .prod .locked svg{stroke:var(--faint); width:12px; height:12px}
+  .prod .warn{display:flex; align-items:flex-start; gap:6px; margin-top:8px; font-size:13px; color:var(--accent); font-weight:500; line-height:1.35}
+  .prod .warn svg{stroke:var(--accent); fill:none; width:14px; height:14px; flex:none; margin-top:1px}
+  .prod .links{display:flex; gap:16px; margin-top:8px; font-size:13px}
+  .prod .links a{color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom:1px}
+  .prod .links a:hover{color:var(--muted); border-color:var(--muted)}
+  .prod{cursor:pointer}
+  .prod .media, .prod .ttl{cursor:pointer}
+  /* add-to-cart button (shared by card + modal) */
+  .cart{margin-top:12px}
+  .prod .cart{margin-top:auto; padding-top:14px}
+  .btn-cart{display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px 16px; font-size:14px; font-weight:600; background:var(--ink); color:#fff; border:1.5px solid var(--ink); cursor:pointer; text-align:center; transition:background .15s,border-color .15s}
+  .btn-cart:hover{background:#333; border-color:#333}
+  .btn-cart svg{width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.7}
+  .btn-cart.is-disabled{background:var(--util); color:var(--faint); border-color:var(--line); cursor:not-allowed}
+  /* project detail modal */
+  .pmodal-ov{position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.55); display:none; padding:24px}
+  .pmodal-ov.open{display:grid; place-items:center}
+  .pmodal{background:var(--bg); width:min(500px,100%); max-height:88vh; overflow:auto; position:relative; border:1px solid var(--line)}
+  .pm-close{position:absolute; top:10px; right:10px; z-index:3; width:34px; height:34px; background:#fff; border:1px solid var(--line); cursor:pointer; font-size:15px; line-height:1; display:grid; place-items:center}
+  .pm-close:hover{background:var(--util)}
+  .pm-media{position:relative; aspect-ratio:16/10; background:var(--tile); overflow:hidden}
+  .pm-media .art{position:absolute; inset:0; display:grid; place-items:center}
+  .pm-media .art svg{width:38%; height:38%; stroke:#2b2b2b; fill:none; stroke-width:1.2}
+  .pm-media .art.logo{background:#f4ead2}
+  .pm-media .art.logo.marco{background:#f5d24e}
+  .pm-media .art.logo.selene{background:#0b0d12}
+  .pm-media .art.logo.handshake{background:#d4f24d}
+  .pm-media .art.logo img{width:100%; height:100%; object-fit:contain}
+  .pm-body{padding:22px}
+  .pm-label{color:var(--accent); font-weight:500; font-size:13px; margin-bottom:4px}
+  .pm-title{font-size:22px; font-weight:700; letter-spacing:-.01em; margin:0 0 4px}
+  .pm-sub{color:var(--muted); margin-bottom:14px}
+  .pm-desc{color:var(--ink); line-height:1.55; margin:0 0 14px}
+  .pm-desc ul{margin:0; padding-left:1.15em}
+  .pm-desc li{margin:0 0 9px; line-height:1.5}
+  .pm-desc li:last-child{margin-bottom:0}
+  .pm-stat{color:var(--muted); font-size:13px; margin-bottom:18px}
+  .empty{grid-column:1/-1; padding:60px 0; text-align:center; color:var(--muted)}
+
+  /* contact */
+  .contact{border-bottom:1px solid var(--line)}
+  .contact .h2{max-width:20ch}
+  .contact .mail{display:inline-block; font-size:clamp(24px,5vw,48px); font-weight:700; letter-spacing:-.02em; margin:20px 0 26px; border-bottom:2px solid var(--line); padding-bottom:6px; word-break:break-all}
+  .contact .mail:hover{border-color:var(--ink)}
+  .contact .row{display:flex; gap:12px; flex-wrap:wrap}
+
+  /* footer */
+  footer{background:var(--ink); color:#dcdcdc}
+  footer .cols{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:32px; padding:56px 0 40px}
+  @media (max-width:760px){ footer .cols{grid-template-columns:1fr 1fr} }
+  @media (max-width:480px){ footer .cols{grid-template-columns:1fr} }
+  footer .brandcol .nm{color:#fff; font-weight:700; font-size:20px; letter-spacing:-.01em}
+  footer .brandcol p{color:#9a9a9c; margin:12px 0 0; max-width:24rem; font-size:14px}
+  footer h4{color:#8d8d8f; font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin:0 0 16px; font-weight:700}
+  footer ul{list-style:none; margin:0; padding:0}
+  footer ul li{margin:10px 0}
+  footer ul a{color:#dcdcdc; font-size:14px}
+  footer ul a:hover{color:#fff}
+  footer .bottom{border-top:1px solid #2a2a2a; padding:20px 0 30px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:#8d8d8f; font-size:12px}
+
+  /* saved drawer */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,.4); opacity:0; visibility:hidden; transition:opacity .25s; z-index:50}
+  .overlay.open{opacity:1; visibility:visible}
+  .drawer{position:fixed; top:0; right:0; height:100%; width:min(400px,94vw); background:#fff; transform:translateX(100%); transition:transform .28s ease; z-index:60; display:flex; flex-direction:column; border-left:1px solid var(--line)}
+  .drawer.open{transform:none}
+  .drawer .dh{display:flex; align-items:center; justify-content:space-between; padding:22px 24px 14px}
+  .drawer .dh h2{margin:0; font-size:18px; font-weight:500}
+  .drawer .dh button{font-size:20px; line-height:1; color:var(--ink)}
+  .drawer .list{flex:1; overflow-y:auto; padding:0 24px}
+  .drawer .row{display:flex; gap:14px; align-items:center; padding:16px 0; border-top:1px solid var(--line)}
+  .drawer .row .th{width:56px; height:56px; background:var(--tile); display:grid; place-items:center; flex:none}
+  .drawer .row .th svg{width:26px; height:26px; stroke:#2b2b2b; fill:none; stroke-width:1.2}
+  .drawer .row .m{flex:1; min-width:0}
+  .drawer .row .m b{display:block; font-weight:500}
+  .drawer .row .m span{color:var(--muted); font-size:13px}
+  .drawer .row .x{color:var(--muted); font-size:16px; padding:4px}
+  .drawer .row .x:hover{color:var(--ink)}
+  .drawer .none{padding:40px 0; color:var(--muted)}
+  .drawer .foot{padding:18px 24px 26px; border-top:1px solid var(--line)}
+  .drawer .foot .cnt{display:flex; justify-content:space-between; font-size:14px; margin-bottom:14px}
+  .drawer .foot .go{display:block; width:100%; text-align:center; background:var(--ink); color:#fff; padding:15px; font-size:15px; font-weight:500}
+  .drawer .foot .go:hover{background:#333}
+  .drawer .foot .go.dim{background:#c9c9c9; pointer-events:none}
+  .drawer .foot .hint{font-size:12px; color:var(--muted); margin:10px 0 0; text-align:center}
+
+  /* resume viewer modal */
+  .rmodal-ov{position:fixed; inset:0; background:rgba(0,0,0,.6); opacity:0; visibility:hidden; transition:opacity .2s; z-index:80; display:flex; align-items:center; justify-content:center; padding:24px}
+  .rmodal-ov.open{opacity:1; visibility:visible}
+  .rmodal{background:#fff; width:min(920px,100%); height:min(90vh,1100px); display:flex; flex-direction:column; border:1px solid var(--line)}
+  .rmodal .rh{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; background:var(--ink); color:#fff}
+  .rmodal .rh .t{font-size:14px; font-weight:500; letter-spacing:.02em}
+  .rmodal .rh .acts{display:flex; align-items:center; gap:10px}
+  .rmodal .rh a, .rmodal .rh button{color:#fff; font-size:13px; font-weight:500}
+  .rmodal .rh .dl{background:#fff; color:var(--ink); padding:9px 16px; display:inline-flex; align-items:center; gap:7px}
+  .rmodal .rh .dl:hover{background:#e6e6e6}
+  .rmodal .rh .dl svg{stroke:var(--ink); width:15px; height:15px}
+  .rmodal .rh .open{border-bottom:1px solid rgba(255,255,255,.5); padding-bottom:1px}
+  .rmodal .rh .cl{font-size:20px; line-height:1; padding:0 4px}
+  .rmodal .rbody{flex:1; background:#525659; position:relative}
+  .rmodal .rbody iframe{width:100%; height:100%; border:0}
+  .rmodal .rbody .fallback{position:absolute; inset:0; display:grid; place-items:center; color:#fff; text-align:center; padding:24px; font-size:14px}
+  .rmodal .rbody .fallback a{text-decoration:underline}
+
+  .toast{position:fixed; left:24px; bottom:24px; background:var(--ink); color:#fff; padding:14px 18px; font-size:14px; z-index:70; transform:translateY(20px); opacity:0; visibility:hidden; transition:all .22s}
+  .toast.show{transform:none; opacity:1; visibility:visible}
+  @media (prefers-reduced-motion:reduce){ .prod:hover .media .art svg{transform:none} .about .photo,.about:hover .photo{filter:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <a href="assets/resume.pdf" class="js-resume">Résumé</a>
+  <a href="https://github.com/SimonWorku1" target="_blank" rel="noopener">GitHub</a>
+  <a href="https://www.linkedin.com/in/simon-worku/" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="#contact">Contact</a>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <div class="navtools">
+    <div class="searchbox">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="search" placeholder="Search" aria-label="Search projects">
+    </div>
+    <button class="icobtn" id="bagBtn" aria-label="Saved projects">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 8h12l1 12H5z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="n" id="bagCount">0</span>
+    </button>
+  </div>
+</div></header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="avatar" role="img" aria-label="Simon Worku"></div>
+      <h1>Simon Worku</h1>
+      <p class="role">Software Engineer — full-stack web &amp; mobile, and frontier-AI evaluation.</p>
+      <a class="email" href="mailto:simonworku410@gmail.com">simonworku410@gmail.com</a>
+      <div class="cta">
+        <a class="btn btn-fill" href="#work">Shop My Work</a>
+        <a class="btn btn-out" href="https://github.com/SimonWorku1" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-out js-resume" href="assets/resume.pdf">Résumé</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="wrap">
+      <p class="kicker">About</p>
+      <h2 class="h2">Hi, my name is <span class="u">Simon Worku</span>.</h2>
+      <p>I'm a senior undergrad at LMU studying Computer Science with a minor in Computer Engineering. I really like building things from top to bottom, starting with the first rough idea and staying with it all the way down to the last line of code. I like owning what I make and knowing how every part of it works. So far that's meant a real-time multiplayer game, a social platform, and an AI evaluation suite, and with each one I try to sweat the small stuff and make something people genuinely enjoy using.</p>
+      <div class="abtn">
+        <a class="btn btn-dark" href="#contact">Get in touch</a>
+        <a class="btn btn-line js-resume" href="assets/resume.pdf">Read résumé</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / catalog -->
+  <section class="section tight worksec" id="work">
+    <div class="wrap">
+      <div class="titlerow">
+        <div class="lead">
+          <p class="kicker">Portfolio</p>
+          <h1>Selected Work <span id="titleCount">(6)</span></h1>
+        </div>
+        <div class="tools">
+          <button id="hideFilters"><span id="hideFiltersLabel">Hide Filters</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 6h18M6 12h12M10 18h4"/></svg></button>
+          <div class="sortwrap">
+            <button id="sortBtn">Sort By <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="sortmenu" id="sortMenu">
+              <button data-sort="featured" class="sel">Featured</button>
+              <button data-sort="newest">Newest</button>
+              <button data-sort="oldest">Oldest</button>
+              <button data-sort="az">Alphabetical</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout" id="layout">
+        <aside class="side">
+          <div class="catlist" id="catlist">
+            <button data-cat="all" class="active">All Projects</button>
+            <button data-cat="web">Web Apps</button>
+            <button data-cat="mobile">Mobile</button>
+            <button data-cat="games">Games</button>
+            <button data-cat="ai">AI / ML</button>
+            <button data-cat="enterprise">Enterprise</button>
+          </div>
+          <div class="toggle"><span>Open source only</span>
+            <button class="sw" id="openToggle" aria-pressed="false" aria-label="Open source only"></button>
+          </div>
+          <div class="grp" data-grp>
+            <button class="ghead" data-ghead>Status <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="gbody">
+              <label><input type="checkbox" data-f="status" value="open"> Open source</label>
+              <label><input type="checkbox" data-f="status" value="dev"> In development</label>
+              <label><input type="checkbox" data-f="status" value="enterprise"> Enterprise</label>
+            </div>
+          </div>
+          <div class="grp" data-grp>
+            <button class="ghead" data-ghead>Technology <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="gbody">
+              <label><input type="checkbox" data-f="tech" value="react"> React</label>
+              <label><input type="checkbox" data-f="tech" value="typescript"> TypeScript</label>
+              <label><input type="checkbox" data-f="tech" value="firebase"> Firebase</label>
+              <label><input type="checkbox" data-f="tech" value="aws"> AWS</label>
+              <label><input type="checkbox" data-f="tech" value="python"> Python</label>
+              <label><input type="checkbox" data-f="tech" value="docker"> Docker</label>
+            </div>
+          </div>
+          <div class="grp collapsed" data-grp>
+            <button class="ghead" data-ghead>Year <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="gbody">
+              <label><input type="checkbox" data-f="year" value="2026"> 2026</label>
+              <label><input type="checkbox" data-f="year" value="2025"> 2025</label>
+            </div>
+          </div>
+        </aside>
+
+        <div class="grid" id="grid">
+
+          <!-- MarcoPhoto -->
+          <article class="prod" data-cat="games" data-open="yes" data-status="open" data-year="2026" data-tech="react typescript firebase" data-title="MarcoPhoto" data-search="marcophoto game social deduction realtime multiplayer live demo play" data-order="1" data-cart-url="https://marcophoto-9cb75.web.app/" data-cart-label="Add to Cart — Play Live" data-desc="Engineered a real-time multiplayer social deduction game achieving 100+ visits in the first month, supporting up to 19 players by architecting a hybrid of Firebase Cloud Functions and a client-side fallback on Firestore|Integrated photo upload with HEIC/HEIF to JPEG conversion, real-time voting updates, and private data channels based on in-game roles by building a React + Typescript single page application on Firebase|Reduced sign-up friction by implementing Firebase anonymous Authentication, enabling an instant play experience">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art logo marco"><img src="assets/marcophoto-logo.png" alt="MarcoPhoto logo" loading="lazy"></span>
+              <span class="code">Live demo</span>
+            </div>
+            <div class="info">
+              <div class="label">Best Seller</div>
+              <span class="ttl">MarcoPhoto</span>
+              <div class="sub">Real-Time Multiplayer Game</div>
+              <div class="stat">100+ players</div>
+              <div class="links"><a href="https://github.com/SimonWorku1/MarcoPhoto" target="_blank" rel="noopener">Code ↗</a></div>
+              <div class="cart"><a class="btn-cart" href="https://marcophoto-9cb75.web.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5a1.5 1.5 0 0 0 1.5 1.3h7.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg> Add to Cart — Play Live</a></div>
+            </div>
+          </article>
+
+          <!-- Battleship Agent -->
+          <article class="prod" data-cat="ai" data-open="yes" data-status="open" data-year="2026" data-tech="typescript" data-title="Battleship Agent" data-search="battleship agent ai algorithms starsling competition runner up" data-order="2" data-cart-url="https://github.com/SimonWorku1/battleship-agent" data-cart-label="Add to Cart — View Code" data-desc="Starsling Coding Competition 2026: Runner-up. An autonomous Battleship agent written in TypeScript.">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art"><svg viewBox="0 0 24 24"><path d="M2 14h20l-2.2 4.2H4.2z"/><path d="M6.5 14v-3.2h8V14"/><path d="M9 10.8V8h3.2v2.8"/><path d="M10.6 8V5.2"/><path d="M12.2 6.2h4.2"/><path d="M14.5 12.6h4.5"/><path d="M2.5 20q2 1.2 4 0t4 0 4 0 4 0"/></svg></span>
+              <span class="code">TypeScript</span>
+            </div>
+            <div class="info">
+              <div class="label">Award Winner</div>
+              <span class="ttl">Battleship Agent</span>
+              <div class="sub">Autonomous AI Agent</div>
+              <div class="stat">Runner-up · Starsling 2026</div>
+              <div class="cart"><a class="btn-cart" href="https://github.com/SimonWorku1/battleship-agent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5a1.5 1.5 0 0 0 1.5 1.3h7.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg> Add to Cart — View Code</a></div>
+            </div>
+          </article>
+
+          <!-- Faith In God -->
+          <article class="prod" data-cat="mobile" data-open="no" data-status="dev" data-year="2025" data-tech="firebase firestore" data-title="FIG (Faith in God)" data-search="fig faith in god social media app christians prayer messaging firebase" data-order="3" data-cart-disabled="yes" data-cart-label="Private beta" data-desc="Grew a faith-based community of 50+ Christians across Los Angeles by designing a social media app featuring a personalized prayer/verse feed, real-time messaging, and in-app friend discovery|Created a real-time private messaging system supporting text, images, and threaded replies through a Firestore model from a DBML schema with live StreamBuilder listeners on message subcollections|Built a friend recommendation feed by calculating Euclidian distance using user data from Firebase Cloud Functions">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art logo"><img src="assets/fig-logo.png" alt="FIG (Faith in God) logo" loading="lazy"></span>
+              <span class="code">Firebase</span>
+            </div>
+            <div class="info">
+              <div class="label">Community Favorite</div>
+              <span class="ttl">FIG (Faith in God)</span>
+              <div class="sub">Social App · iOS &amp; Web</div>
+              <div class="stat">50+ community members</div>
+              <div class="locked"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Private beta</div>
+              <div class="cart"><span class="btn-cart is-disabled" aria-disabled="true">Private beta</span></div>
+            </div>
+          </article>
+
+          <!-- SeleneOdds -->
+          <article class="prod" data-cat="web enterprise" data-open="no" data-status="enterprise" data-year="2026" data-tech="typescript" data-title="SeleneOdds Betting Tools" data-search="seleneodds betting data visualization arbitrage calculators typescript web" data-order="4" data-cart-url="https://app.seleneodds.com" data-cart-label="Add to Cart — Open App" data-desc="Developed interactive data visualization and filtering tools that improved profitable bettors' ability to spot actionable trends, processing user data across 2 major prediction markets|Developed multiple dynamic web calculators using TypeScript to help high-volume sports bettors find arbitrage opportunities and use a multitude of odds-translation tools across the company's main webpage|Designed the calculator tab and its movable icon, and designed the bet tracker as well">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art logo selene"><img src="assets/selene-logo.png" alt="Selene logo" loading="lazy"></span>
+              <span class="code">TypeScript</span>
+            </div>
+            <div class="info">
+              <div class="label">Just Shipped</div>
+              <span class="ttl">SeleneOdds Betting Tools</span>
+              <div class="sub">Data-Viz &amp; Calculators</div>
+              <div class="stat">In production</div>
+              <div class="locked"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Enterprise</div>
+              <div class="cart"><a class="btn-cart" href="https://app.seleneodds.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5a1.5 1.5 0 0 0 1.5 1.3h7.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg> Add to Cart — Open App</a></div>
+            </div>
+          </article>
+
+          <!-- ECFC -->
+          <article class="prod" data-cat="mobile web enterprise" data-open="no" data-status="dev" data-year="2026" data-tech="react aws stripe" data-title="ECFC Community App" data-search="church community app ecfc aws stripe donations react typescript" data-order="5" data-cart-disabled="yes" data-cart-label="Not available yet" data-desc="Working with industry leaders to develop a 150+ member community engagement platform for web and mobile devices with prayer requests, volunteer sign-ups, event calendar, tithe/donation system, and member directory using AWS|Engineering a Stripe-powered tithe and donation system using React + TypeScript, projected to eliminate cash-based donation tracking and significantly reduce manual accounting overhead for the church's finance team|Designing cross-platform dynamic UI in React/TSX, ensuring accessibility across all mobile device types for 150+ members">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art"><svg viewBox="0 0 24 24"><path d="M12 2v4M10 4h4"/><path d="M12 6l6 4v10H6V10z"/><path d="M10 20v-5h4v5"/></svg></span>
+              <span class="code">React / AWS</span>
+            </div>
+            <div class="info">
+              <div class="label">Coming Soon</div>
+              <span class="ttl">ECFC Community App</span>
+              <div class="sub">Community Platform · Stripe</div>
+              <div class="stat">150+ members</div>
+              <div class="locked"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Client build</div>
+              <div class="cart"><span class="btn-cart is-disabled" aria-disabled="true">Not available yet</span></div>
+            </div>
+          </article>
+
+          <!-- Handshake AI -->
+          <article class="prod" data-cat="ai enterprise" data-open="no" data-status="enterprise" data-year="2026" data-tech="python docker" data-title="Frontier LLM Eval Suite" data-search="handshake ai llm evaluation benchmarks docker python fail to pass tests" data-order="6" data-cart-disabled="yes" data-cart-label="Not available yet" data-desc="Engineering evaluation benchmarks for frontier LLMs, creating solutions which expose the gaps in current AI capabilities by designing fail-to-pass tests and analyzing large open-source codebases|Stabilizing containerized evaluation pipelines for frontier LLM benchmarks, eliminating false positive validation failures by designing custom Docker build layers and making a standard dependency environment|Resolving critical cross-platform execution blockers using virtual environments, ensuring the script was fully reliable under enterprise security constraints">
+            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <div class="media">
+              <span class="art logo handshake"><img src="assets/handshake-logo.png" alt="Handshake AI logo" loading="lazy"></span>
+              <span class="code">Python / Docker</span>
+            </div>
+            <div class="info">
+              <div class="label">Research</div>
+              <span class="ttl">Frontier LLM Eval Suite</span>
+              <div class="sub">LLM Evaluation · Handshake AI</div>
+              <div class="stat">Frontier models</div>
+              <div class="locked"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Confidential</div>
+              <div class="cart"><span class="btn-cart is-disabled" aria-disabled="true">Not available yet</span></div>
+            </div>
+          </article>
+
+          <div class="empty" id="empty" style="display:none">No projects match these filters.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <p class="kicker">Contact</p>
+      <h2 class="h2">Let's work together.</h2>
+      <a class="mail" href="mailto:simonworku410@gmail.com">simonworku410@gmail.com</a>
+      <div class="row">
+        <a class="btn btn-dark" href="mailto:simonworku410@gmail.com">Email me</a>
+        <a class="btn btn-line" href="https://github.com/SimonWorku1" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-line" href="https://www.linkedin.com/in/simon-worku/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-line js-resume" href="assets/resume.pdf">Résumé</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="brandcol">
+        <div class="nm">Simon Worku</div>
+        <p>Software engineer &amp; CS student at Loyola Marymount University. Full-stack web &amp; mobile, and frontier-AI evaluation.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Selected Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="assets/resume.pdf" class="js-resume">Résumé</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:simonworku410@gmail.com">Email</a></li>
+          <li><a href="https://github.com/SimonWorku1" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/simon-worku/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Projects</h4>
+        <ul>
+          <li><a href="https://marcophoto-9cb75.web.app/" target="_blank" rel="noopener">MarcoPhoto</a></li>
+          <li><a href="https://github.com/SimonWorku1/battleship-agent" target="_blank" rel="noopener">Battleship Agent</a></li>
+          <li><a href="https://app.seleneodds.com" target="_blank" rel="noopener">SeleneOdds</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Simon Worku · Los Angeles, CA</span>
+      <span>Built with plain HTML &amp; CSS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- saved drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Saved projects">
+  <div class="dh"><h2>Saved</h2><button id="closeDrawer" aria-label="Close">✕</button></div>
+  <div class="list" id="savedList"></div>
+  <div class="foot">
+    <div class="cnt"><span>Projects saved</span><span id="savedCount">0</span></div>
+    <a class="go dim" id="emailBtn">Email me about these</a>
+    <p class="hint">No checkout — this just opens an email listing what you saved.</p>
+  </div>
+</aside>
+
+<!-- résumé viewer -->
+<div class="rmodal-ov" id="resumeModal">
+  <div class="rmodal">
+    <div class="rh">
+      <span class="t">Résumé — Simon Worku</span>
+      <div class="acts">
+        <a class="open" id="resumeOpen" href="assets/resume.pdf" target="_blank" rel="noopener">Open in new tab ↗</a>
+        <a class="dl" href="assets/resume.pdf" download="Simon-Worku-Resume.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg> Download
+        </a>
+        <button class="cl" id="resumeClose" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div class="rbody">
+      <div class="fallback">Can't preview the PDF here? <a href="assets/resume.pdf" target="_blank" rel="noopener">Open it in a new tab</a>.</div>
+      <iframe id="resumeFrame" title="Résumé — Simon Worku"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- project detail modal -->
+<div class="pmodal-ov" id="projModal" aria-hidden="true">
+  <div class="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="pm-close" id="pmClose" aria-label="Close">✕</button>
+    <div class="pm-media" id="pmMedia"></div>
+    <div class="pm-body">
+      <div class="pm-label" id="pmLabel"></div>
+      <h2 class="pm-title" id="pmTitle"></h2>
+      <div class="pm-sub" id="pmSub"></div>
+      <div class="pm-desc" id="pmDesc"></div>
+      <div class="pm-stat" id="pmStat"></div>
+      <div class="cart" id="pmCart"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  // Keep reloads (Cmd-R) at the top instead of jumping to the last #anchor (e.g. #contact)
+  if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
+  if(location.hash){ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} window.scrollTo(0,0); }
+
+  var products=Array.prototype.slice.call(document.querySelectorAll('.prod'));
+  var grid=document.getElementById('grid'), empty=document.getElementById('empty');
+  var titleCount=document.getElementById('titleCount');
+  var state={cat:'all', open:false, status:[], tech:[], year:[], q:'', sort:'featured'};
+  function inList(l,v){ return l.indexOf(v)>-1; }
+  function match(p){
+    var d=p.dataset;
+    if(state.cat!=='all' && d.cat.split(' ').indexOf(state.cat)===-1) return false;
+    if(state.open && d.open!=='yes') return false;
+    if(state.status.length && !inList(state.status,d.status)) return false;
+    if(state.year.length && !inList(state.year,d.year)) return false;
+    if(state.tech.length){ var pt=d.tech.split(' '); if(!state.tech.some(function(t){return pt.indexOf(t)>-1;})) return false; }
+    if(state.q){ if((d.search+' '+d.title).toLowerCase().indexOf(state.q)===-1) return false; }
+    return true;
+  }
+  function apply(){
+    var vis=products.filter(match), arr=vis.slice();
+    if(state.sort==='newest') arr.sort(function(a,b){return (b.dataset.year-a.dataset.year)||(a.dataset.order-b.dataset.order);});
+    else if(state.sort==='oldest') arr.sort(function(a,b){return (a.dataset.year-b.dataset.year)||(a.dataset.order-b.dataset.order);});
+    else if(state.sort==='az') arr.sort(function(a,b){return a.dataset.title.localeCompare(b.dataset.title);});
+    else arr.sort(function(a,b){return a.dataset.order-b.dataset.order;});
+    products.forEach(function(p){p.style.display='none';});
+    arr.forEach(function(p){p.style.display=''; grid.appendChild(p);});
+    grid.appendChild(empty); empty.style.display=vis.length?'none':'';
+    titleCount.textContent='('+vis.length+')';
+  }
+  function setCat(cat){
+    state.cat=cat;
+    document.querySelectorAll('[data-cat]').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-cat')===cat); });
+    apply();
+  }
+  document.querySelectorAll('#catlist [data-cat]').forEach(function(b){ b.addEventListener('click', function(){ setCat(b.getAttribute('data-cat')); }); });
+  var openToggle=document.getElementById('openToggle');
+  openToggle.addEventListener('click', function(){ state.open=!state.open; openToggle.setAttribute('aria-pressed', state.open?'true':'false'); apply(); });
+  document.querySelectorAll('input[data-f]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      var f=cb.getAttribute('data-f'), v=cb.value;
+      if(cb.checked){ if(!inList(state[f],v)) state[f].push(v); } else { state[f]=state[f].filter(function(x){return x!==v;}); }
+      apply();
+    });
+  });
+  document.querySelectorAll('[data-ghead]').forEach(function(h){ h.addEventListener('click', function(){ h.closest('[data-grp]').classList.toggle('collapsed'); }); });
+  var search=document.getElementById('search');
+  search.addEventListener('input', function(){ state.q=search.value.trim().toLowerCase(); apply(); });
+  var sortBtn=document.getElementById('sortBtn'), sortMenu=document.getElementById('sortMenu');
+  sortBtn.addEventListener('click', function(e){ e.stopPropagation(); sortMenu.classList.toggle('open'); });
+  document.addEventListener('click', function(){ sortMenu.classList.remove('open'); });
+  sortMenu.querySelectorAll('[data-sort]').forEach(function(b){
+    b.addEventListener('click', function(){
+      state.sort=b.getAttribute('data-sort');
+      sortMenu.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel');
+      sortMenu.classList.remove('open'); apply();
+    });
+  });
+  var layout=document.getElementById('layout'), hideBtn=document.getElementById('hideFilters'), hideLabel=document.getElementById('hideFiltersLabel');
+  hideBtn.addEventListener('click', function(){ layout.classList.toggle('nofilters'); hideLabel.textContent=layout.classList.contains('nofilters')?'Show Filters':'Hide Filters'; });
+
+
+  // saved / bag
+  var saved=[];
+  var bagCount=document.getElementById('bagCount'), savedList=document.getElementById('savedList'),
+      savedCount=document.getElementById('savedCount'), emailBtn=document.getElementById('emailBtn');
+  var drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  var toast=document.getElementById('toast'), toastT;
+  function say(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){toast.classList.remove('show');},1600); }
+  function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+  function renderSaved(){
+    bagCount.textContent=saved.length; bagCount.classList.toggle('show', saved.length>0);
+    savedCount.textContent=saved.length; emailBtn.classList.toggle('dim', saved.length===0);
+    if(!saved.length){ savedList.innerHTML='<p class="none">Nothing saved yet. Tap the heart on a project to save it here.</p>'; return; }
+    savedList.innerHTML=saved.map(function(s,i){
+      return '<div class="row"><div class="th">'+s.art+'</div><div class="m"><b>'+s.title+'</b><span>'+(s.link?'View link':'Ask me about it')+'</span></div><button class="x" data-x="'+i+'" aria-label="Remove">✕</button></div>';
+    }).join('');
+  }
+  products.forEach(function(p){
+    var btn=p.querySelector('.save');
+    btn.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      var title=p.dataset.title, idx=saved.map(function(s){return s.title;}).indexOf(title);
+      if(idx>-1){ saved.splice(idx,1); btn.classList.remove('on'); say('Removed from saved'); }
+      else { var art=p.querySelector('.art').innerHTML; var lk=p.dataset.cartUrl||''; saved.push({title:title, art:art, link:lk}); btn.classList.add('on'); say(title+' saved'); }
+      renderSaved();
+    });
+  });
+  savedList.addEventListener('click', function(e){
+    var x=e.target.closest('[data-x]'); if(!x) return;
+    var i=parseInt(x.getAttribute('data-x'),10), t=saved[i].title; saved.splice(i,1);
+    products.forEach(function(p){ if(p.dataset.title===t) p.querySelector('.save').classList.remove('on'); });
+    renderSaved();
+  });
+  document.getElementById('bagBtn').addEventListener('click', openDrawer);
+  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  emailBtn.addEventListener('click', function(){
+    if(!saved.length) return;
+    var list=saved.map(function(s){return '- '+s.title+(s.link?' ('+s.link+')':'');}).join('\n');
+    var body='Hi Simon,\n\nI came across your portfolio and wanted to ask about:\n\n'+list+'\n\nWould love to connect.\n\nThanks!';
+    window.location.href='mailto:simonworku410@gmail.com?subject='+encodeURIComponent('Interested in your work')+'&body='+encodeURIComponent(body);
+  });
+
+  // résumé viewer modal
+  var rModal=document.getElementById('resumeModal'), rFrame=document.getElementById('resumeFrame');
+  var rSrc='assets/resume.pdf#toolbar=1&navpanes=0&view=FitH';
+  function openResume(){ if(!rFrame.getAttribute('src')) rFrame.setAttribute('src', rSrc); rModal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeResume(){ rModal.classList.remove('open'); document.body.style.overflow=''; }
+  document.addEventListener('click', function(e){
+    var t=e.target.closest('.js-resume'); if(t){ e.preventDefault(); openResume(); }
+  });
+  document.getElementById('resumeClose').addEventListener('click', closeResume);
+  rModal.addEventListener('click', function(e){ if(e.target===rModal) closeResume(); });
+
+  // project detail modal
+  var pModal=document.getElementById('projModal');
+  var pmMedia=document.getElementById('pmMedia'), pmLabel=document.getElementById('pmLabel'),
+      pmTitle=document.getElementById('pmTitle'), pmSub=document.getElementById('pmSub'),
+      pmDesc=document.getElementById('pmDesc'), pmStat=document.getElementById('pmStat'),
+      pmCart=document.getElementById('pmCart');
+  var cartIcon='<svg viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5a1.5 1.5 0 0 0 1.5 1.3h7.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg>';
+  function cartHTML(p){
+    var label=p.dataset.cartLabel||'Add to Cart';
+    if(p.dataset.cartDisabled==='yes' || !p.dataset.cartUrl){
+      return '<span class="btn-cart is-disabled" aria-disabled="true">'+label+'</span>';
+    }
+    return '<a class="btn-cart" href="'+p.dataset.cartUrl+'" target="_blank" rel="noopener">'+cartIcon+' '+label+'</a>';
+  }
+  function openProject(p){
+    var art=p.querySelector('.art');
+    pmMedia.innerHTML=art?art.outerHTML:'';
+    var labelEl=p.querySelector('.label'), subEl=p.querySelector('.sub'), statEl=p.querySelector('.stat');
+    pmLabel.textContent=labelEl?labelEl.textContent:''; pmLabel.style.display=labelEl?'':'none';
+    pmTitle.textContent=p.dataset.title;
+    pmSub.textContent=subEl?subEl.textContent:''; pmSub.style.display=subEl?'':'none';
+    var desc=p.dataset.desc||'';
+    var parts=desc.split('|').map(function(s){return s.trim();}).filter(Boolean);
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    if(parts.length>1){ pmDesc.innerHTML='<ul>'+parts.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ul>'; }
+    else { pmDesc.textContent=desc; }
+    pmStat.textContent=statEl?statEl.textContent:''; pmStat.style.display=statEl?'':'none';
+    pmCart.innerHTML=cartHTML(p);
+    pModal.classList.add('open'); pModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  }
+  function closeProject(){ pModal.classList.remove('open'); pModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  products.forEach(function(p){
+    p.addEventListener('click', function(e){
+      if(e.target.closest('.save') || e.target.closest('a') || e.target.closest('.btn-cart')) return;
+      openProject(p);
+    });
+  });
+  document.getElementById('pmClose').addEventListener('click', closeProject);
+  pModal.addEventListener('click', function(e){ if(e.target===pModal) closeProject(); });
+
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeResume(); closeDrawer(); closeProject(); } });
+
+  renderSaved(); apply();
+})();
+</script>
+</body>
+</html>
