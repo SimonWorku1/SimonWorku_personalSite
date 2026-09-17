@@ -139,10 +139,11 @@
   .prod:hover .media .art.logo img{transform:scale(1.05)}
   .prod .media .code{position:absolute; left:16px; bottom:14px; font-size:12px; color:#9a9a9c}
   a.media{cursor:pointer} div.media{cursor:default}
-  .save{position:absolute; top:12px; right:12px; z-index:2; width:36px; height:36px; background:#fff; display:grid; place-items:center; opacity:0; transition:opacity .15s}
-  .prod:hover .save, .save.on{opacity:1}
-  .save svg{stroke:var(--ink); fill:none; width:18px; height:18px}
-  .save.on svg{fill:var(--ink)}
+  .save{position:absolute; top:12px; right:12px; z-index:2; display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 13px; background:#fff; border:1px solid var(--line); font-size:12px; font-weight:600; color:var(--ink); white-space:nowrap; box-shadow:0 1px 5px rgba(0,0,0,.1); transition:background .15s,color .15s,border-color .15s}
+  .save:hover{background:var(--util)}
+  .save svg{stroke:var(--ink); fill:none; width:14px; height:14px; flex:none}
+  .save.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .save.on svg{fill:#fff; stroke:#fff}
   .prod .info{padding:12px 2px 4px; display:flex; flex-direction:column; flex:1 1 auto}
   .prod .label{color:var(--accent); font-weight:500; margin-bottom:2px}
   .prod .ttl{font-weight:500; color:var(--ink)}
@@ -223,8 +224,9 @@
   .drawer .dh button{font-size:20px; line-height:1; color:var(--ink)}
   .drawer .list{flex:1; overflow-y:auto; padding:0 24px}
   .drawer .row{display:flex; gap:14px; align-items:center; padding:16px 0; border-top:1px solid var(--line)}
-  .drawer .row .th{width:56px; height:56px; background:var(--tile); display:grid; place-items:center; flex:none}
+  .drawer .row .th{width:56px; height:56px; background:var(--tile); display:grid; place-items:center; flex:none; overflow:hidden}
   .drawer .row .th svg{width:26px; height:26px; stroke:#2b2b2b; fill:none; stroke-width:1.2}
+  .drawer .row .th img{width:100%; height:100%; object-fit:contain}
   .drawer .row .m{flex:1; min-width:0}
   .drawer .row .m b{display:block; font-weight:500}
   .drawer .row .m span{color:var(--muted); font-size:13px}
@@ -381,7 +383,7 @@
 
           <!-- MarcoPhoto -->
           <article class="prod" data-cat="games" data-open="yes" data-status="open" data-year="2026" data-tech="react typescript firebase" data-title="MarcoPhoto" data-search="marcophoto game social deduction realtime multiplayer live demo play" data-order="1" data-cart-url="https://marcophoto-9cb75.web.app/" data-cart-label="Add to Cart — Play Live" data-desc="Engineered a real-time multiplayer social deduction game achieving 100+ visits in the first month, supporting up to 19 players by architecting a hybrid of Firebase Cloud Functions and a client-side fallback on Firestore|Integrated photo upload with HEIC/HEIF to JPEG conversion, real-time voting updates, and private data channels based on in-game roles by building a React + Typescript single page application on Firebase|Reduced sign-up friction by implementing Firebase anonymous Authentication, enabling an instant play experience">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art logo marco"><img src="assets/marcophoto-logo.png" alt="MarcoPhoto logo" loading="lazy"></span>
               <span class="code">Live demo</span>
@@ -398,7 +400,7 @@
 
           <!-- Battleship Agent -->
           <article class="prod" data-cat="ai" data-open="yes" data-status="open" data-year="2026" data-tech="typescript" data-title="Battleship Agent" data-search="battleship agent ai algorithms starsling competition runner up" data-order="2" data-cart-url="https://github.com/SimonWorku1/battleship-agent" data-cart-label="Add to Cart — View Code" data-desc="Starsling Coding Competition 2026: Runner-up. An autonomous Battleship agent written in TypeScript.">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art"><svg viewBox="0 0 24 24"><path d="M2 14h20l-2.2 4.2H4.2z"/><path d="M6.5 14v-3.2h8V14"/><path d="M9 10.8V8h3.2v2.8"/><path d="M10.6 8V5.2"/><path d="M12.2 6.2h4.2"/><path d="M14.5 12.6h4.5"/><path d="M2.5 20q2 1.2 4 0t4 0 4 0 4 0"/></svg></span>
               <span class="code">TypeScript</span>
@@ -414,7 +416,7 @@
 
           <!-- Faith In God -->
           <article class="prod" data-cat="mobile" data-open="no" data-status="dev" data-year="2025" data-tech="firebase firestore" data-title="FIG (Faith in God)" data-search="fig faith in god social media app christians prayer messaging firebase" data-order="3" data-cart-disabled="yes" data-cart-label="Private beta" data-desc="Grew a faith-based community of 50+ Christians across Los Angeles by designing a social media app featuring a personalized prayer/verse feed, real-time messaging, and in-app friend discovery|Created a real-time private messaging system supporting text, images, and threaded replies through a Firestore model from a DBML schema with live StreamBuilder listeners on message subcollections|Built a friend recommendation feed by calculating Euclidian distance using user data from Firebase Cloud Functions|[Email me](mailto:simonworku410@gmail.com?subject=FIG%20private%20tester%20group) to get added to the private tester group!">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art logo"><img src="assets/fig-logo.png" alt="FIG (Faith in God) logo" loading="lazy"></span>
               <span class="code">Firebase</span>
@@ -431,7 +433,7 @@
 
           <!-- SeleneOdds -->
           <article class="prod" data-cat="web enterprise" data-open="no" data-status="enterprise" data-year="2026" data-tech="typescript" data-title="SeleneOdds Betting Tools" data-search="seleneodds betting data visualization arbitrage calculators typescript web" data-order="4" data-cart-url="https://app.seleneodds.com" data-cart-label="Add to Cart — Open App" data-desc="Developed interactive data visualization and filtering tools that improved profitable bettors' ability to spot actionable trends, processing user data across 2 major prediction markets|Developed multiple dynamic web calculators using TypeScript to help high-volume sports bettors find arbitrage opportunities and use a multitude of odds-translation tools across the company's main webpage|Designed the calculator tab and its movable icon, and designed the bet tracker as well">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art logo selene"><img src="assets/selene-logo.png" alt="Selene logo" loading="lazy"></span>
               <span class="code">TypeScript</span>
@@ -448,7 +450,7 @@
 
           <!-- ECFC -->
           <article class="prod" data-cat="mobile web enterprise" data-open="no" data-status="dev" data-year="2026" data-tech="react aws stripe" data-title="ECFC Community App" data-search="church community app ecfc aws stripe donations react typescript" data-order="5" data-cart-disabled="yes" data-cart-label="Not available yet" data-desc="Working with industry leaders to develop a 150+ member community engagement platform for web and mobile devices with prayer requests, volunteer sign-ups, event calendar, tithe/donation system, and member directory using AWS|Engineering a Stripe-powered tithe and donation system using React + TypeScript, projected to eliminate cash-based donation tracking and significantly reduce manual accounting overhead for the church's finance team|Designing cross-platform dynamic UI in React/TSX, ensuring accessibility across all mobile device types for 150+ members">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art"><svg viewBox="0 0 24 24"><path d="M12 2v4M10 4h4"/><path d="M12 6l6 4v10H6V10z"/><path d="M10 20v-5h4v5"/></svg></span>
               <span class="code">React / AWS</span>
@@ -465,7 +467,7 @@
 
           <!-- Handshake AI -->
           <article class="prod" data-cat="ai enterprise" data-open="no" data-status="enterprise" data-year="2026" data-tech="python docker" data-title="Frontier LLM Eval Suite" data-search="handshake ai llm evaluation benchmarks docker python fail to pass tests" data-order="6" data-cart-disabled="yes" data-cart-label="Not available yet" data-desc="Engineering evaluation benchmarks for frontier LLMs, creating solutions which expose the gaps in current AI capabilities by designing fail-to-pass tests and analyzing large open-source codebases|Stabilizing containerized evaluation pipelines for frontier LLM benchmarks, eliminating false positive validation failures by designing custom Docker build layers and making a standard dependency environment|Resolving critical cross-platform execution blockers using virtual environments, ensuring the script was fully reliable under enterprise security constraints">
-            <button class="save" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg></button>
+            <button class="save" aria-label="Save in cart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.6 2.6 5.5 5.8 5.5c2 0 3.3 1.2 4.2 2.6.9-1.4 2.2-2.6 4.2-2.6 3.2 0 4.8 3.1 3.1 6.5C19 16.4 12 21 12 21z"/></svg><span class="save-label">Save in cart</span></button>
             <div class="media">
               <span class="art logo handshake"><img src="assets/handshake-logo.png" alt="Handshake AI logo" loading="lazy"></span>
               <span class="code">Python / Docker</span>
@@ -669,25 +671,27 @@
   function renderSaved(){
     bagCount.textContent=saved.length; bagCount.classList.toggle('show', saved.length>0);
     savedCount.textContent=saved.length; emailBtn.classList.toggle('dim', saved.length===0);
-    if(!saved.length){ savedList.innerHTML='<p class="none">Nothing saved yet. Tap the heart on a project to save it here.</p>'; return; }
+    if(!saved.length){ savedList.innerHTML='<p class="none">Nothing saved yet. Tap "Save in cart" on a project to add it here.</p>'; return; }
     savedList.innerHTML=saved.map(function(s,i){
       return '<div class="row"><div class="th">'+s.art+'</div><div class="m"><b>'+s.title+'</b><span>'+(s.link?'View link':'Ask me about it')+'</span></div><button class="x" data-x="'+i+'" aria-label="Remove">✕</button></div>';
     }).join('');
   }
+  function syncSaveBtn(btn){ var l=btn.querySelector('.save-label'); if(l) l.textContent=btn.classList.contains('on')?'Saved':'Save in cart'; }
   products.forEach(function(p){
     var btn=p.querySelector('.save');
     btn.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
       var title=p.dataset.title, idx=saved.map(function(s){return s.title;}).indexOf(title);
-      if(idx>-1){ saved.splice(idx,1); btn.classList.remove('on'); say('Removed from saved'); }
-      else { var art=p.querySelector('.art').innerHTML; var lk=p.dataset.cartUrl||''; saved.push({title:title, art:art, link:lk}); btn.classList.add('on'); say(title+' saved'); }
+      if(idx>-1){ saved.splice(idx,1); btn.classList.remove('on'); say('Removed from cart'); }
+      else { var art=p.querySelector('.art').innerHTML; var lk=p.dataset.cartUrl||''; saved.push({title:title, art:art, link:lk}); btn.classList.add('on'); say(title+' added to cart'); }
+      syncSaveBtn(btn);
       renderSaved();
     });
   });
   savedList.addEventListener('click', function(e){
     var x=e.target.closest('[data-x]'); if(!x) return;
     var i=parseInt(x.getAttribute('data-x'),10), t=saved[i].title; saved.splice(i,1);
-    products.forEach(function(p){ if(p.dataset.title===t) p.querySelector('.save').classList.remove('on'); });
+    products.forEach(function(p){ if(p.dataset.title===t){ var b=p.querySelector('.save'); b.classList.remove('on'); syncSaveBtn(b); } });
     renderSaved();
   });
   document.getElementById('bagBtn').addEventListener('click', openDrawer);
