@@ -226,7 +226,8 @@
   .drawer .dh h2{margin:0; font-size:18px; font-weight:500}
   .drawer .dh button{font-size:20px; line-height:1; color:var(--ink)}
   .drawer .list{flex:1; overflow-y:auto; padding:0 24px}
-  .drawer .row{display:flex; gap:14px; align-items:center; padding:16px 0; border-top:1px solid var(--line)}
+  .drawer .row{display:flex; gap:14px; align-items:center; padding:16px 8px; margin:0 -8px; border-top:1px solid var(--line); cursor:pointer; transition:background .12s}
+  .drawer .row:hover{background:var(--util)}
   .drawer .row .th{width:56px; height:56px; background:var(--tile); display:grid; place-items:center; flex:none; overflow:hidden}
   .drawer .row .th svg{width:26px; height:26px; stroke:#2b2b2b; fill:none; stroke-width:1.2}
   .drawer .row .th img{width:100%; height:100%; object-fit:contain}
@@ -676,7 +677,7 @@
     savedCount.textContent=saved.length; emailBtn.classList.toggle('dim', saved.length===0);
     if(!saved.length){ savedList.innerHTML='<p class="none">Nothing saved yet. Tap "Save in cart" on a project to add it here.</p>'; return; }
     savedList.innerHTML=saved.map(function(s,i){
-      return '<div class="row"><div class="th">'+s.art+'</div><div class="m"><b>'+s.title+'</b><span>'+(s.link?'View link':'Ask me about it')+'</span></div><button class="x" data-x="'+i+'" aria-label="Remove">✕</button></div>';
+      return '<div class="row" data-idx="'+i+'"><div class="th">'+s.art+'</div><div class="m"><b>'+s.title+'</b><span>'+(s.link?'View link':'Ask me about it')+'</span></div><button class="x" data-x="'+i+'" aria-label="Remove">✕</button></div>';
     }).join('');
   }
   function syncSaveBtn(btn){ var l=btn.querySelector('.save-label'); if(l) l.textContent=btn.classList.contains('on')?'Saved':'Save in cart'; }
@@ -692,10 +693,17 @@
     });
   });
   savedList.addEventListener('click', function(e){
-    var x=e.target.closest('[data-x]'); if(!x) return;
-    var i=parseInt(x.getAttribute('data-x'),10), t=saved[i].title; saved.splice(i,1);
-    products.forEach(function(p){ if(p.dataset.title===t){ var b=p.querySelector('.save'); b.classList.remove('on'); syncSaveBtn(b); } });
-    renderSaved();
+    var x=e.target.closest('[data-x]');
+    if(x){
+      var i=parseInt(x.getAttribute('data-x'),10), t=saved[i].title; saved.splice(i,1);
+      products.forEach(function(p){ if(p.dataset.title===t){ var b=p.querySelector('.save'); b.classList.remove('on'); syncSaveBtn(b); } });
+      renderSaved();
+      return;
+    }
+    var row=e.target.closest('[data-idx]'); if(!row) return;
+    var s=saved[parseInt(row.getAttribute('data-idx'),10)]; if(!s) return;
+    var prod=products.filter(function(p){return p.dataset.title===s.title;})[0];
+    if(prod){ closeDrawer(); openProject(prod); }
   });
   document.getElementById('bagBtn').addEventListener('click', openDrawer);
   document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
